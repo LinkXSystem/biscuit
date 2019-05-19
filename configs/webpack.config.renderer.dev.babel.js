@@ -118,9 +118,27 @@ export default merge.smart(baseConfig, {
           }
         ]
       },
-      // SASS support - compile all other .scss files and pipe it to style.css
+      // SASS support - compile all .scss files and pipe it to style.css
       {
-        test: /^((?!\.global).)*\.(scss|sass)$/,
+        test: /^((?!\.global|\.module).)*\.(scss|sass)$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      },
+      // SASS support - compile all other .module.scss files and pipe it to style.css
+      {
+        test: /\.module\.(scss|sass)$/,
         use: [
           {
             loader: 'style-loader'

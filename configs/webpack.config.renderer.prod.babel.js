@@ -87,27 +87,42 @@ export default merge.smart(baseConfig, {
           }
         ]
       },
-      // Add SASS support  - compile all other .scss files and pipe it to style.css
+      // SASS support - compile all .scss files and pipe it to style.css
       {
-        test: /^((?!\.global).)*\.(scss|sass)$/,
+        test: /^((?!\.global|\.module).)*\.(scss|sass)$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      },
+      // SASS support - compile all other .module.scss files and pipe it to style.css
+      {
+        test: /\.module\.(scss|sass)$/,
+        use: [
+          {
+            loader: 'style-loader'
           },
           {
             loader: 'css-loader',
             options: {
               modules: true,
+              sourceMap: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]__[hash:base64:5]',
-              sourceMap: true
+              localIdentName: '[name]__[local]__[hash:base64:5]'
             }
           },
           {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
+            loader: 'sass-loader'
           }
         ]
       },
