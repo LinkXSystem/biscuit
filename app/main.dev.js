@@ -10,10 +10,11 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import MenuBuilder from './menu';
+import MenuBuilder from './electron/menu';
+import EventBuilder from './electron/event';
 
 export default class AppUpdater {
   constructor() {
@@ -93,8 +94,10 @@ app.on('ready', async () => {
     mainWindow = null;
   });
 
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
+  const menu = new MenuBuilder(mainWindow);
+  menu.buildMenu();
+  const event = new EventBuilder(mainWindow);
+  event.build(ipcMain);
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
