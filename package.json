@@ -263,7 +263,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "scratch-blocks": "^0.1.0-prerelease.1555512815",
-    "scratch-vm": "^0.2.0-prerelease.20190418214522",
+    "scratch-vm": "^0.2.0-prerelease.20200714185213",
     "source-map-support": "^0.5.9",
     "styled-components": "^4.2.0",
     "xterm": "^3.13.2"
